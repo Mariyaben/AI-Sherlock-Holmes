@@ -18,3 +18,5 @@ venv.bak/
 .DS_Store
 .vscode/
 .idea/
+# Hide Dockerfile from Railway (backend-only deployment)
+Dockerfile
