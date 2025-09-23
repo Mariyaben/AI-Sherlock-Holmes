@@ -1,7 +1,25 @@
-streamlit
-chromadb
-python-dotenv
-sentence-transformers
-langchain
-langchain-openai
-PyMuPDF
+# Flask and web framework dependencies
+flask==2.3.3
+flask-cors==4.0.0
+flask-limiter==3.5.0
+
+# Database and vector storage
+chromadb==0.4.15
+sentence-transformers==2.2.2
+
+# AI and language processing
+google-generativeai==0.3.2
+langchain==0.0.350
+langchain-openai==0.0.2
+
+# Utilities
+python-dotenv==1.0.0
+PyMuPDF==1.23.8
+
+# Development and testing
+pytest==7.4.3
+pytest-flask==1.3.0
+
+# Production dependencies
+gunicorn==21.2.0
+whitenoise==6.6.0
