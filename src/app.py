@@ -40,6 +40,27 @@ logger = setup_logger(__name__)
 chat_service = ChatService()
 memory_service = MemoryService()
 
+def load_case_data():
+    """Load all case files from data/cases directory into ChromaDB."""
+    try:
+        cases_dir = "data/cases"
+        case_data = {}
+        
+        for filename in os.listdir(cases_dir):
+            if filename.endswith('.txt'):
+                file_path = os.path.join(cases_dir, filename)
+                text = extract_text_from_txt(file_path)
+                case_data[filename] = text
+        
+        # Store embeddings in ChromaDB
+        case_collection = chat_service.get_case_collection()
+        store_embeddings(case_collection, case_data)
+        logger.info(f"Loaded {len(case_data)} case files into ChromaDB")
+        
+    except Exception as e:
+        logger.error(f"Error loading case data: {str(e)}")
+        raise
+
 def initialize_data():
     """Initialize ChromaDB collections and load case data on first request."""
     try:
@@ -67,25 +88,6 @@ if not app.config['DEBUG']:
         except Exception as e:
             logger.error(f"Failed to initialize app: {str(e)}")
 
-def load_case_data():
-    """Load all case files from data/cases directory into ChromaDB."""
-    try:
-        cases_dir = "data/cases"
-        case_data = {}
-        
-        for filename in os.listdir(cases_dir):
-            if filename.endswith('.txt'):
-                file_path = os.path.join(cases_dir, filename)
-                text = extract_text_from_txt(file_path)
-                case_data[filename] = text
-        
-        # Store embeddings
-        store_embeddings(chat_service.get_case_collection(), case_data)
-        logger.info(f"Loaded {len(case_data)} case files")
-        
-    except Exception as e:
-        logger.error(f"Error loading case data: {str(e)}")
-        raise
 
 @app.route('/health', methods=['GET'])
 def health_check():
