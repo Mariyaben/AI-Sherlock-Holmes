@@ -13,7 +13,7 @@ class Config:
     PORT = int(os.getenv('PORT', 5000))
     
     # CORS settings
-    ALLOWED_ORIGINS = os.getenv('ALLOWED_ORIGINS', 'http://localhost:3000,http://localhost:8080').split(',')
+    ALLOWED_ORIGINS = os.getenv('ALLOWED_ORIGINS', 'http://localhost:3000,http://localhost:8080,https://ai-sherlock-holmes-697d.vercel.app').split(',')
     
     # ChromaDB settings
     CHROMA_DB_PATH = os.getenv('CHROMA_DB_PATH', 'chroma_db')
