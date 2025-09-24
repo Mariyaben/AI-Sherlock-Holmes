@@ -245,7 +245,7 @@ const ChatInterface = ({ sessionId }) => {
 
   useEffect(() => {
     loadChatHistory();
-  }, [sessionId]);
+  }, [sessionId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const loadChatHistory = async () => {
     try {
